@@ -3,14 +3,15 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import json
 
-try:
-    BASE_URL = 'https://tiki.vn/'
-    response = requests.get(BASE_URL)
-except Exception as err:
-    print(f'ERROR: {err}')
+def load_website(url,prefix):
+    try:
+        response = requests.get(prefix+url)
+        return BeautifulSoup(response.text)
+    except Exception as err:
+        print(f'ERROR: {err}')
 
 
-soup = BeautifulSoup(response.text)    
+soup = load_website('https://tiki.vn/',prefix='')    
 categories = soup.find_all('a',class_='MenuItem__MenuLink-tii3xq-1 efuIbv')
 category, link = [], []
 for h in range(len(categories)):
@@ -21,13 +22,6 @@ for h in range(len(categories)):
         print('pass')
 
 d = list(zip(category,link))
-
-def load_website(url,prefix):
-    try:
-        response = requests.get(prefix+url)
-        return BeautifulSoup(response.text)
-    except Exception as err:
-        print(f'ERROR: {err}')
 
 titles, images, fprice, category, num_reviews, ratings, tikinow = [], [], [], [], [], [], []
 for j in range(len(d)):
