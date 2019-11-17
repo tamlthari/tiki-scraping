@@ -1,5 +1,5 @@
 # tiki-scraping
-A web crawler that scraps a single page or all product pages on Tiki.vn
+A web crawler that scraps a single page or all product pages on Tiki.vn \n
 The visualizer is based on Flask framework
 ## Scrap a single product page
 1. Prepare the database in json
